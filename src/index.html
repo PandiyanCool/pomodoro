@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Pomodoro</title>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no" />
+
+    <link rel='stylesheet' href='http://fonts.googleapis.com/css?family=Roboto:400,500,700,400italic'>
+    <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/angular_material/1.0.7/angular-material.min.css">
+    <link rel="stylesheet" href="assets/app.css" />
+
+    <style type="text/css">
+        /**
+     * Hide when Angular is not yet loaded and initialized
+     */
+        
+        [ng\:cloak],
+        [ng-cloak],
+        [data-ng-cloak],
+        [x-ng-cloak],
+        .ng-cloak,
+        .x-ng-cloak {
+            display: none !important;
+        }
+    </style>
+
+</head>
+
+<body ng-app="app" layout="column" ng-controller="PomodoroController as vm" ng-cloak>
+    <md-content flex layout="row" layout-align="center center">
+        <section flex> </section>
+        <section class="pomodoro-container" flex-md="30" flex-gt-sm="25" flex-sm="60" flex-xs="100">
+
+        </section>
+        <section flex></section>
+    </md-content>
+
+
+    <!-- Vendor scripts -->
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular-animate.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular-aria.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular-messages.min.js"></script>
+
+    <!-- Angular Material Library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.0.7/angular-material.min.js"></script>
+
+    <script src="app/pomodoro/pomodoro.module.js"></script>
+    <script src="app/pomodoro/pomodoro.controller.js"></script>
+
+    <script src="app/app.module.js"></script>
+    <script src="app/app.config.js"></script>
+</body>
+
+</html>
