@@ -10,7 +10,7 @@
   <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no" />
 
   <link rel='stylesheet' href='http://fonts.googleapis.com/css?family=Roboto:400,500,700,400italic'>
-  <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/angular_material/1.0.7/angular-material.min.css">
+  <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0-rc2/angular-material.min.css">
   <link rel="stylesheet" href="assets/app.css" />
   <link rel="shortcut icon" ng-href="{{vm.isBreak ? 'assets/images/break.ico':'assets/images/active.ico'}}" />
 
@@ -33,103 +33,111 @@
 
 <body layout="column" ng-cloak ng-class="{active:vm.isActive,break:vm.isBreak}">
   <md-content flex layout="row" layout-align="center center" class="main-content">
-    <section flex> </section>
+
     <section class="pomodoro-container" flex-md="35" flex-gt-sm="25" flex-sm="60" flex-xs="100">
       <div>
-        <h1>{{vm.time}}</h2>
-         <div ng-if="vm.isActive && !vm.interruptable"><md-button class="md-raised" ng-click="vm.start()">Start</md-button></div>
-             <div ng-if="vm.interruptable">
-               <md-button class="md-raised" ng-click="vm.interrupt()">Interrupt</md-button>
-             </div>
-            </div>
-        </section>
-        <section flex></section>
-          <md-button class="md-fab md-fab-top-right" aria-label="Settings" ng-click="vm.showSetting()">
-           <md-icon md-svg-icon="settings"></md-icon>
-        </md-button>
-    </md-content>
+        <h1>{{vm.time}}</h1>
+        <div ng-if="!vm.isBreak && !vm.interruptable">
+          <md-button class="md-raised" ng-click="vm.start()">Start</md-button>
+        </div>
+        <div ng-if="vm.interruptable">
+          <md-button class="md-raised" ng-click="vm.interrupt()">Interrupt</md-button>
+        </div>
+      </div>
+    </section>
+
+    <md-button class="md-fab md-fab-top-right" aria-label="Settings" ng-click="vm.showSetting()">
+      <md-icon md-svg-icon="settings"></md-icon>
+    </md-button>
+  </md-content>
 
 
-    <!-- Vendor scripts -->
-    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular.min.js"></script>
-    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular-animate.min.js"></script>
-    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular-cookies.js"></script>
-    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular-aria.min.js"></script>
-    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular-messages.min.js"></script>
+  <!-- Vendor scripts -->
+  <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular.min.js"></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular-animate.min.js"></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular-cookies.js"></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular-aria.min.js"></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular-messages.min.js"></script>
 
-    <!-- Angular Material Library -->
-    <script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.0.7/angular-material.min.js"></script>
+  <!-- Angular Material Library -->
+  <script src="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0-rc2/angular-material.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/1.1.29/howler.min.js"></script>
 
-    <script src="app/pomodoro/pomodoro.module.js"></script>
-    <script src="app/pomodoro/pomodoro.constants.js"></script>
-    <script src="app/pomodoro/pomodoro.service.js"></script>
-    <script src="app/pomodoro/pomodoro.controller.js"></script>
+  <script src="app/pomodoro/pomodoro.module.js"></script>
+  <script src="app/pomodoro/pomodoro.constants.js"></script>
+  <script src="app/pomodoro/pomodoro.service.js"></script>
+  <script src="app/pomodoro/pomodoro.controller.js"></script>
 
-    <script src="app/app.module.js"></script>
-    <script src="app/app.config.js"></script>
-    
-    <script type="text/ng-template" id="setting.html">
-    
+  <script src="app/app.module.js"></script>
+  <script src="app/app.config.js"></script>
+
+  <script type="text/ng-template" id="setting.html">
+
     <md-bottom-sheet class="md-list md-has-header" ng-cloak>
-        <md-subheader>Settings</md-subheader>
-          <div layout>
-      <div flex="10" flex-xs="20" layout layout-align="center center">
-        <span class="md-body-1">Active</span>
-      </div>
-      <md-slider flex="30" flex-xs="70" min="{{vm.config.active.min}}" max="{{vm.config.active.max}}" ng-model="vm.settings.active" aria-label="red" id="red-slider" class>
-      </md-slider>
-      
-      <div flex="5" flex-xs="10" layout layout-align="center center">
-       <span>{{vm.settings.active}}</span>
-      </div>
-    </div>
-     <div layout>
-      <div flex="10" flex-xs="20"  layout layout-align="center center">
-        <span class="md-body-1">Short Break</span>
-      </div>
-      <md-slider flex="30" flex-xs="70" min="{{vm.config.shortBreak.min}}" max="{{vm.config.shortBreak.max}}" ng-model="vm.settings.shortBreak" aria-label="red" id="red-slider" class>
-      </md-slider>
-      
-      <div flex="5" flex-xs="10"  layout layout-align="center center">
-       <span>{{vm.settings.shortBreak}}</span>
-      </div>
-    </div>
-    
-    <div layout>
-      <div flex="10" flex-xs="20"  layout layout-align="center center">
-        <span class="md-body-1">Long Break</span>
-      </div>
-      <md-slider flex="30" flex-xs="70" min="{{vm.config.longBreak.min}}" max="{{vm.config.longBreak.max}}" ng-model="vm.settings.longBreak" aria-label="red" id="red-slider" class>
-      </md-slider>
-      
-      <div flex="5" flex-xs="10"  layout layout-align="center center">
-       <span>{{vm.settings.longBreak}}</span>
-      </div>
-    </div>
-    
-    
-    <div layout>
-      <div flex="10" flex-xs="40" layout layout-align="center center">
-        <span class="md-body-1">Audio Notification</span>
-      </div>
-      <md-switch ng-model="vm.settings.audio" aria-label="Audio notification">
-  </md-switch>
+      <md-subheader>Settings</md-subheader>
 
-    </div>
-    
-       <div layout>
-      <div flex="50" flex-xs="100" layout layout-align="center center">
+      <div layout>
+        <div flex="10" flex-xs="20" layout layout-align="center center">
+          <span class="md-body-1">Active</span>
+        </div>
+        <md-slider flex="30" flex-xs="70" min="{{vm.config.active.min}}" max="{{vm.config.active.max}}" ng-model="vm.settings.active"
+          aria-label="red" id="red-slider" class>
+        </md-slider>
 
-        <md-button class="md-raised" ng-click="vm.reset()">Reset</md-button>
-        <md-button class="md-raised" ng-click="vm.apply()">Apply</md-button>
+        <div flex="5" flex-xs="10" layout layout-align="center center">
+          <span>{{vm.settings.active}}</span>
+        </div>
+      </div>
+
+      <div layout>
+        <div flex="10" flex-xs="20" layout layout-align="center center">
+          <span class="md-body-1">Short Break</span>
+        </div>
+        <md-slider flex="30" flex-xs="70" min="{{vm.config.shortBreak.min}}" max="{{vm.config.shortBreak.max}}" ng-model="vm.settings.shortBreak"
+          aria-label="red" id="red-slider" class>
+        </md-slider>
+
+        <div flex="5" flex-xs="10" layout layout-align="center center">
+          <span>{{vm.settings.shortBreak}}</span>
+        </div>
+      </div>
+
+      <div layout>
+        <div flex="10" flex-xs="20" layout layout-align="center center">
+          <span class="md-body-1">Long Break</span>
+        </div>
+        <md-slider flex="30" flex-xs="70" min="{{vm.config.longBreak.min}}" max="{{vm.config.longBreak.max}}" ng-model="vm.settings.longBreak"
+          aria-label="red" id="red-slider" class>
+        </md-slider>
+
+        <div flex="5" flex-xs="10" layout layout-align="center center">
+          <span>{{vm.settings.longBreak}}</span>
+        </div>
+      </div>
+
+      <div layout>
+        <div flex="10" flex-xs="40" layout layout-align="center center">
+          <span class="md-body-1">Audio Notification</span>
+        </div>
+        <md-switch ng-model="vm.settings.audio" aria-label="Audio notification">
+        </md-switch>
 
       </div>
 
+      <div layout>
+        <div flex="50" flex-xs="100" layout layout-align="center center">
 
-    </div>
-  </md-bottom-sheet>
+          <md-button class="md-raised" ng-click="vm.reset()">Reset</md-button>
+          <md-button class="md-raised" ng-click="vm.apply()">Apply</md-button>
 
-    </script>
+        </div>
+
+
+      </div>
+
+    </md-bottom-sheet>
+
+  </script>
 </body>
 
 </html>

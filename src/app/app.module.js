@@ -6,5 +6,6 @@
         [
             'ngMaterial',
             'app.pomodoro'
-        ]);
+        ])
+        .constant('Howl', Howl);
 })();

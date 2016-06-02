@@ -17,7 +17,7 @@
         vm.showSetting = showSetting;
         vm.time = secondsToHms(service.settings().active * 60);
         vm.completePomdoros = 0;
-        vm.isActive = true;
+        vm.isActive = false;
         vm.interruptable = false;
         vm.interrupt = interrupt;
 
@@ -38,6 +38,7 @@
             if (angular.isDefined(activeTimer)) {
                 $interval.cancel(activeTimer);
                 activeTimer = undefined;
+                vm.isActive = false;
             }
 
             if (angular.isDefined(breakTimer)) {
@@ -48,7 +49,7 @@
 
             vm.interruptable = false;
             vm.time = secondsToHms(service.settings().active * 60);
-            vm.isActive = true;
+
 
             return;
         }
@@ -84,21 +85,10 @@
             }
         }
 
-        function notify() {
-
-            var audioSetting = service.settings().audio;
-
-            if (audioSetting) {
-                var audio = new Audio('assets/audio/alarm.mp3');
-                audio.play();
-            }
-
-        }
-
         function confirmBreak() {
 
             vm.isBreak = true;
-            notify();
+            service.notify();
 
             var confirm = $mdDialog.confirm()
                 .title('Take a break!')
@@ -120,7 +110,7 @@
                 return;
 
             var countDownSecs = breakMinutes * 60;
-
+            vm.time = secondsToHms(countDownSecs);
             breakTimer = $interval(breakRunner, 1000);
             vm.interruptable = true;
 
@@ -130,10 +120,10 @@
                     $interval.cancel(breakTimer);
                     breakTimer = undefined;
 
-                    vm.isActive = true;
                     vm.isBreak = false;
                     vm.interruptable = false;
-                    notify();
+                    vm.time = secondsToHms(service.settings().active * 60);
+                    service.notify();
                 }
                 else {
                     countDownSecs--;
