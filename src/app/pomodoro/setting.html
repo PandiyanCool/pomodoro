@@ -1,0 +1,66 @@
+<md-bottom-sheet class="md-list md-has-header" ng-cloak>
+    <md-subheader>Settings</md-subheader>
+    <div layout>
+        <div flex="20" layout layout-align="center center">
+            <span class="md-body-1">Active</span>
+        </div>
+        <div flex="40">
+            <div layout layout-align="center center">
+                <md-slider flex="80" min="{{vm.config.active.min}}" max="{{vm.config.active.max}}" ng-model="vm.settings.active" aria-label="red"
+                    id="red-slider" class>
+                </md-slider>
+                <div flex="20">
+                    <span>{{vm.settings.active}}</span>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    </div>
+    <div layout>
+        <div flex="10" layout layout-align="center center">
+            <span class="md-body-1">Short Break</span>
+        </div>
+        <md-slider flex="30" min="{{vm.config.shortBreak.min}}" max="{{vm.config.shortBreak.max}}" ng-model="vm.settings.shortBreak"
+            aria-label="red" id="red-slider" class>
+        </md-slider>
+
+        <div flex="5" layout layout-align="center center">
+            <span>{{vm.settings.shortBreak}}</span>
+        </div>
+    </div>
+
+    <div layout>
+        <div flex="10" layout layout-align="center center">
+            <span class="md-body-1">Long Break</span>
+        </div>
+        <md-slider flex="30" min="{{vm.config.longBreak.min}}" max="{{vm.config.longBreak.max}}" ng-model="vm.settings.longBreak"
+            aria-label="red" id="red-slider" class>
+        </md-slider>
+
+        <div flex="5" layout layout-align="center center">
+            <span>{{vm.settings.longBreak}}</span>
+        </div>
+    </div>
+
+
+    <div layout>
+        <div flex="10" layout layout-align="center center">
+            <span class="md-body-1">Audio Notification</span>
+        </div>
+        <md-switch ng-model="vm.settings.audio" aria-label="Audio notification">
+        </md-switch>
+
+    </div>
+
+    <div layout>
+        <div flex="50" layout layout-align="center center">
+
+            <md-button class="md-raised" ng-click="vm.reset()">Reset</md-button>
+            <md-button class="md-raised" ng-click="vm.apply()">Apply</md-button>
+
+        </div>
+        </md-switch>
+
+    </div>
+</md-bottom-sheet>

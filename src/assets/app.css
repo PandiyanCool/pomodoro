@@ -5,5 +5,37 @@ body {
     height: 100%;
     margin: 0px;
     padding: 0px;
-    background: #e2e1e0;
+    background: #DE3641;
 }
+
+body.break{
+    background: #54bb87;
+}
+
+.main-content{
+    background: transparent;
+}
+
+  .pomodoro-container{
+      text-align: center;
+      color:white;
+  }
+  .pomodoro-container h1{
+      font-size: 10vw;
+      margin: 0;
+      padding: 5px;
+      font-weight:lighter;
+  }
+  
+    .pomodoro-container md-button{
+        padding: 10px 20px;
+    }
+    
+    .md-dialog-content {
+        min-width: 240px;   
+    }
+    
+    md-bottom-sheet{
+        position: fixed;    
+    }
+    
