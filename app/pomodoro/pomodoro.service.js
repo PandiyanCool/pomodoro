@@ -8,7 +8,7 @@
 
         var settingStore = angular.copy(init);
         var audio = new Howl({
-            urls: ['/assets/audio/alarm.mp3'],
+            urls: ['https://raw.githubusercontent.com/Purush0th/pomodoro/gh-pages/assets/audio/alarm.mp3'],
             volume: 1.0
         });
 
